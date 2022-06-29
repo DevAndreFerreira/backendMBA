@@ -1,9 +1,6 @@
 package io.github.devandreferreira.trabalhomba.controller;
 
-import io.github.devandreferreira.trabalhomba.component.CadastraDoacaoComponent;
-import io.github.devandreferreira.trabalhomba.component.CadastraLocalDoacaoComponent;
-import io.github.devandreferreira.trabalhomba.component.CadastraUsuarioComponent;
-import io.github.devandreferreira.trabalhomba.component.RetornaListaLocalDoacaoComponent;
+import io.github.devandreferreira.trabalhomba.component.*;
 import io.github.devandreferreira.trabalhomba.dto.*;
 import io.github.devandreferreira.trabalhomba.model.LocalDoacao;
 import io.github.devandreferreira.trabalhomba.model.Usuario;
@@ -29,6 +26,18 @@ public class TrabalhoMbaController {
 
     @Autowired
     private CadastraDoacaoComponent cadastraDoacao;
+
+    @Autowired
+    private ValidaLoginSistemaComponent validaLoginSistema;
+
+    @GetMapping("/login")
+    public ResponseEntity<Object> logaNoSistema(@RequestBody UsuarioDto usuarioDto) {
+        Boolean aBoolean = validaLoginSistema.validaLogin(usuarioDto.getNome(), usuarioDto.getSenha());
+        if(aBoolean) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
 
     @PostMapping("/criaUsuario")
     public ResponseEntity<Usuario> cadastraUsuario(@RequestBody UsuarioDto usuarioDto) {
