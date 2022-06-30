@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 public class MarcaDoacaoDto {
 
-    @JsonProperty("localretirada")
-    private Integer id_localRetirada;
+    @JsonProperty("localdoacao")
+    private Integer id_localdoacao;
 
     @JsonProperty("codigo_usuario")
     private Integer id_usuario;

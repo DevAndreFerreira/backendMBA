@@ -32,9 +32,9 @@ public class TrabalhoMbaController {
 
     @GetMapping("/login")
     public ResponseEntity<Object> logaNoSistema(@RequestBody UsuarioDto usuarioDto) {
-        Boolean aBoolean = validaLoginSistema.validaLogin(usuarioDto.getNome(), usuarioDto.getSenha());
-        if(aBoolean) {
-            return new ResponseEntity<>(HttpStatus.OK);
+        Integer idUsuario = validaLoginSistema.validaLogin(usuarioDto.getNome(), usuarioDto.getSenha());
+        if(null != idUsuario) {
+            return new ResponseEntity<>(new UsuarioDto(idUsuario), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }

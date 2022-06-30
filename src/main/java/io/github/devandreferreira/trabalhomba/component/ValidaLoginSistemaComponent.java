@@ -13,18 +13,22 @@ public class ValidaLoginSistemaComponent {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Boolean validaLogin(String usuario, String senha) {
+    @Autowired
+    private CriaPrimeirosInsertCompont criaPrimeirosInsertCompont;
 
-        Boolean status = false;
+    public Integer validaLogin(String usuario, String senha) {
+
+        Integer id = null;
+        criaPrimeirosInsertCompont.primeiraInsercao();
 
         List<Usuario> listaUsuario = usuarioRepository.findAll();
         for (Usuario user: listaUsuario) {
             if(user.getNome().equals(usuario) && user.getSenha().equals(senha)) {
-                status = true;
+                id = user.getId_usuario();
                 break;
             }
         }
-        return status;
+        return id;
     }
 
 }
