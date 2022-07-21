@@ -1,9 +1,12 @@
 package io.github.devandreferreira.doacaoSangue.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -11,16 +14,29 @@ import javax.persistence.*;
 public class Doacao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_LocalDoacao")
-    private LocalDoacao localDoacao;
+    @NotBlank(message = "Campo obrigatorio")
+    private String id_solicitante;
 
-    @OneToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+    @NotBlank(message = "Campo obrigatorio")
+    private String nomeSolicitante;
+
+    @NotBlank(message = "Campo obrigatorio")
+    private String nomeLocalDoacao;
+
+    @NotBlank(message = "Campo obrigatorio")
+    private String tipoSangue;
+
+    @NotBlank(message = "Campo obrigatorio")
+    private String descricao;
+
+    private String tipoDoacao;
+
+    private String status;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String id_doador;
 
     public Doacao() {}
 

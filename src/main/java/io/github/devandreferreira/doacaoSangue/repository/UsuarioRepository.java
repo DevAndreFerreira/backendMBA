@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer>  {
+public interface UsuarioRepository extends JpaRepository<Usuario, String>  {
 
     @Query(value = "SELECT * FROM Usuario WHERE login = :login AND senha = :senha", nativeQuery = true)
     Usuario capturaUsuarioESenha(@Param("login") String login, @Param("senha") String senha);

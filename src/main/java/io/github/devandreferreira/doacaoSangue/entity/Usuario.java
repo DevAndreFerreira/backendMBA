@@ -38,6 +38,9 @@ public class Usuario {
     @NotBlank(message = "Campo obrigatorio")
     private String cpf;
 
+    @NotNull(message = "Campo obrigatorio")
+    private Boolean doador;
+
     public Usuario() {
     }
 
