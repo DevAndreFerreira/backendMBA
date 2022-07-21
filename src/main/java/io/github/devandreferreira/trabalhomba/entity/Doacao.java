@@ -1,4 +1,4 @@
-package io.github.devandreferreira.trabalhomba.model;
+package io.github.devandreferreira.trabalhomba.entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 package io.github.devandreferreira.trabalhomba.component;
 
-import io.github.devandreferreira.trabalhomba.model.LocalDoacao;
+import io.github.devandreferreira.trabalhomba.entity.LocalDoacao;
 import io.github.devandreferreira.trabalhomba.repository.LocalDoacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

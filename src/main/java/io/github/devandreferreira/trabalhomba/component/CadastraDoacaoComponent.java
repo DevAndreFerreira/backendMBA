@@ -2,9 +2,9 @@ package io.github.devandreferreira.trabalhomba.component;
 
 import io.github.devandreferreira.trabalhomba.dto.DoacaoDto;
 import io.github.devandreferreira.trabalhomba.dto.MarcaDoacaoDto;
-import io.github.devandreferreira.trabalhomba.model.Doacao;
-import io.github.devandreferreira.trabalhomba.model.LocalDoacao;
-import io.github.devandreferreira.trabalhomba.model.Usuario;
+import io.github.devandreferreira.trabalhomba.entity.Doacao;
+import io.github.devandreferreira.trabalhomba.entity.LocalDoacao;
+import io.github.devandreferreira.trabalhomba.entity.Usuario;
 import io.github.devandreferreira.trabalhomba.repository.DoacaoRepository;
 import io.github.devandreferreira.trabalhomba.repository.LocalDoacaoRepository;
 import io.github.devandreferreira.trabalhomba.repository.UsuarioRepository;

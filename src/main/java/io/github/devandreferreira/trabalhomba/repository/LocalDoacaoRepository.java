@@ -1,6 +1,6 @@
 package io.github.devandreferreira.trabalhomba.repository;
 
-import io.github.devandreferreira.trabalhomba.model.LocalDoacao;
+import io.github.devandreferreira.trabalhomba.entity.LocalDoacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

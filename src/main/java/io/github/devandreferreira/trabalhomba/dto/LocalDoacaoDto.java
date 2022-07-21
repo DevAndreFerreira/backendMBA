@@ -1,6 +1,6 @@
 package io.github.devandreferreira.trabalhomba.dto;
 
-import io.github.devandreferreira.trabalhomba.model.LocalDoacao;
+import io.github.devandreferreira.trabalhomba.entity.LocalDoacao;
 import lombok.Getter;
 import lombok.Setter;
 

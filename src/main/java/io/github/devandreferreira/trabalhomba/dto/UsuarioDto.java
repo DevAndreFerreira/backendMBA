@@ -9,10 +9,10 @@ import lombok.Setter;
 public class UsuarioDto {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Integer id;
+    private String id;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String nome;
+    private String login;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String senha;
@@ -25,8 +25,9 @@ public class UsuarioDto {
 
     public UsuarioDto() {}
 
-    public UsuarioDto(Integer id) {
+    public UsuarioDto(String login, String id) {
         this.id = id;
+        this.login = login;
     }
 
 }
