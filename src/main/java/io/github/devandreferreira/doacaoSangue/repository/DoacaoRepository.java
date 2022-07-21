@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DoacaoRepository extends JpaRepository<Doacao, Integer> {
+public interface DoacaoRepository extends JpaRepository<Doacao, String> {
 
     @Query(value = "SELECT * FROM Doacao WHERE status = :status ", nativeQuery = true)
     List<Doacao> listaDoacaoPorStatus(@Param("status") String status);

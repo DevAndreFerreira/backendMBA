@@ -63,6 +63,15 @@ public class DoacaoSangueController {
         }
         return new ResponseEntity<>(doacaos, HttpStatus.OK);
     }
+
+    @PutMapping("/atualizaDoacao/{id_doacao}")
+    public ResponseEntity<Object> atualizaDoacao(@PathVariable String id_doacao, @RequestBody DoadorDto doadorDto) {
+        Doacao doacao = doacaoService.atualizaDoacao(id_doacao, doadorDto);
+        if(doacao == null) {
+            return new ResponseEntity<>(new AvisosDto("Doacao ou Doador inválidos"), HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        return new ResponseEntity<>(doacao, HttpStatus.OK);
+    }
 }
 
 

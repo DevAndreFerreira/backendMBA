@@ -1,8 +1,10 @@
 package io.github.devandreferreira.doacaoSangue.service;
 
+import io.github.devandreferreira.doacaoSangue.component.AtualizaDoacaoComponent;
 import io.github.devandreferreira.doacaoSangue.component.CadastraDoacaoComponent;
 import io.github.devandreferreira.doacaoSangue.component.ListaDoacaoComponent;
 import io.github.devandreferreira.doacaoSangue.component.ValidaUsuarioSistemaComponent;
+import io.github.devandreferreira.doacaoSangue.dto.DoadorDto;
 import io.github.devandreferreira.doacaoSangue.entity.Doacao;
 import io.github.devandreferreira.doacaoSangue.enumeration.UtilEnum;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -24,10 +26,12 @@ public class DoacaoService {
     @Autowired
     private ValidaUsuarioSistemaComponent validaUsuarioSistema;
 
+    @Autowired
+    private AtualizaDoacaoComponent atualizaDoacao;
+
     public Doacao cadastraDoacao(Doacao doacao) {
         if (validaUsuarioSistema.validaUsuario(doacao.getId_solicitante())) {
             doacao.setId(RandomStringUtils.randomAlphanumeric(20, 20));
-            doacao.setTipoDoacao(UtilEnum.SOLICITACAO_DOACAO.toString());
             doacao.setStatus(UtilEnum.AGUARDANDO_DOADOR.toString());
             return cadastraDoacao.cadastraDoacao(doacao);
         }
@@ -36,6 +40,10 @@ public class DoacaoService {
 
     public List<Doacao> listaDoacaoAbertas() {
         return listaDoacaoComponent.listaDoacao(UtilEnum.AGUARDANDO_DOADOR.toString());
+    }
+
+    public Doacao atualizaDoacao(String idDoacao, DoadorDto doadorDto) {
+        return atualizaDoacao.atualizaDoacaoComDoador(idDoacao, doadorDto);
     }
 
 }

@@ -31,12 +31,13 @@ public class Doacao {
     @NotBlank(message = "Campo obrigatorio")
     private String descricao;
 
-    private String tipoDoacao;
-
     private String status;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String id_doador;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String nomeDoador;
 
     public Doacao() {}
 
