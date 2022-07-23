@@ -55,7 +55,8 @@ public class DoacaoSangueController {
     }
 
     @GetMapping("/listaDoacao")
-    public ResponseEntity<Object> listaDoacao(@RequestParam(name = "page", defaultValue = "1") String page, @RequestParam(name = "size", defaultValue = "1") String size) {
+    public ResponseEntity<Object> listaDoacao(@RequestParam(name = "page", defaultValue = "0") String page,
+                                              @RequestParam(name = "size", defaultValue = "10") String size) {
         Page<Doacao> doacaos = doacaoService.listaDoacaoAbertas(Integer.valueOf(page), Integer.valueOf(size));
         if(doacaos.isEmpty()) {
             return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
@@ -64,7 +65,8 @@ public class DoacaoSangueController {
     }
 
     @GetMapping("/listaDoacaoComDoador")
-    public ResponseEntity<Object> listaDoacaoComDoador(@RequestParam(name = "page", defaultValue = "1") String page, @RequestParam(name = "size", defaultValue = "1") String size) {
+    public ResponseEntity<Object> listaDoacaoComDoador(@RequestParam(name = "page", defaultValue = "0") String page,
+                                                       @RequestParam(name = "size", defaultValue = "10") String size) {
         Page<Doacao> doacaos = doacaoService.listaDoacaoComDoador(Integer.valueOf(page), Integer.valueOf(size));
         if(doacaos.isEmpty()) {
             return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
@@ -73,7 +75,8 @@ public class DoacaoSangueController {
     }
 
     @GetMapping("/lista")
-    public ResponseEntity<Object> listaTudo(@RequestParam(name = "page", defaultValue = "1") String page, @RequestParam(name = "size", defaultValue = "1") String size) {
+    public ResponseEntity<Object> listaTudo(@RequestParam(name = "page", defaultValue = "0") String page,
+                                            @RequestParam(name = "size", defaultValue = "10") String size) {
         Page<Doacao> doacaos = doacaoService.lista(Integer.valueOf(page), Integer.valueOf(size));
         if(doacaos.isEmpty()) {
             return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
@@ -82,7 +85,8 @@ public class DoacaoSangueController {
     }
 
     @PutMapping("/atualizaDoacao/{id_doacao}")
-    public ResponseEntity<Object> atualizaDoacao(@PathVariable String id_doacao, @RequestBody DoadorDto doadorDto) {
+    public ResponseEntity<Object> atualizaDoacao(@PathVariable String id_doacao,
+                                                 @RequestBody DoadorDto doadorDto) {
         Doacao doacao = doacaoService.atualizaDoacao(id_doacao, doadorDto);
         if(doacao == null) {
             return new ResponseEntity<>(new AvisosDto("Doacao ou Doador inválidos"), HttpStatus.UNPROCESSABLE_ENTITY);
@@ -92,8 +96,8 @@ public class DoacaoSangueController {
 
     @GetMapping("/historicoSolicitacao")
     public ResponseEntity<Object> listaDoacoesPorSolicitante(@RequestParam(name = "idSolicitante", required = true) String id,
-                                                             @RequestParam(name = "page", defaultValue = "1") String page,
-                                                             @RequestParam(name = "size", defaultValue = "1") String size) {
+                                                             @RequestParam(name = "page", defaultValue = "0") String page,
+                                                             @RequestParam(name = "size", defaultValue = "10") String size) {
         Page<Doacao> doacaos = doacaoService.listaSolicitacoesPorNomePessoa(id, Integer.valueOf(page), Integer.valueOf(size));
         if(doacaos.isEmpty()) {
             return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
@@ -103,8 +107,8 @@ public class DoacaoSangueController {
 
     @GetMapping("/historicoDoador")
     public ResponseEntity<Object> listaDoacoesPorDoador(@RequestParam(name = "idDoador", required = true) String id,
-                                                        @RequestParam(name = "page", defaultValue = "1") String page,
-                                                        @RequestParam(name = "size", defaultValue = "1") String size) {
+                                                        @RequestParam(name = "page", defaultValue = "0") String page,
+                                                        @RequestParam(name = "size", defaultValue = "10") String size) {
         Page<Doacao> doacaos = doacaoService.listaDoadoresPorNomeDoador(id, Integer.valueOf(page), Integer.valueOf(size));
         if(doacaos.isEmpty()) {
             return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
