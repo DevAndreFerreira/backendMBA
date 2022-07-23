@@ -1,6 +1,5 @@
 package io.github.devandreferreira.doacaoSangue.controller;
 
-import io.github.devandreferreira.doacaoSangue.component.CadastraDoacaoComponent;
 import io.github.devandreferreira.doacaoSangue.dto.*;
 import io.github.devandreferreira.doacaoSangue.entity.Doacao;
 import io.github.devandreferreira.doacaoSangue.entity.Usuario;
@@ -8,12 +7,12 @@ import io.github.devandreferreira.doacaoSangue.service.CadastraUsuarioService;
 import io.github.devandreferreira.doacaoSangue.service.DoacaoService;
 import io.github.devandreferreira.doacaoSangue.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/trabalho")
@@ -56,8 +55,26 @@ public class DoacaoSangueController {
     }
 
     @GetMapping("/listaDoacao")
-    public ResponseEntity<Object> listaDoacao() {
-        List<Doacao> doacaos = doacaoService.listaDoacaoAbertas();
+    public ResponseEntity<Object> listaDoacao(@RequestParam(name = "page", defaultValue = "1") String page, @RequestParam(name = "size", defaultValue = "1") String size) {
+        Page<Doacao> doacaos = doacaoService.listaDoacaoAbertas(Integer.valueOf(page), Integer.valueOf(size));
+        if(doacaos.isEmpty()) {
+            return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(doacaos, HttpStatus.OK);
+    }
+
+    @GetMapping("/listaDoacaoComDoador")
+    public ResponseEntity<Object> listaDoacaoComDoador(@RequestParam(name = "page", defaultValue = "1") String page, @RequestParam(name = "size", defaultValue = "1") String size) {
+        Page<Doacao> doacaos = doacaoService.listaDoacaoComDoador(Integer.valueOf(page), Integer.valueOf(size));
+        if(doacaos.isEmpty()) {
+            return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(doacaos, HttpStatus.OK);
+    }
+
+    @GetMapping("/lista")
+    public ResponseEntity<Object> listaTudo(@RequestParam(name = "page", defaultValue = "1") String page, @RequestParam(name = "size", defaultValue = "1") String size) {
+        Page<Doacao> doacaos = doacaoService.lista(Integer.valueOf(page), Integer.valueOf(size));
         if(doacaos.isEmpty()) {
             return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
         }
@@ -72,6 +89,29 @@ public class DoacaoSangueController {
         }
         return new ResponseEntity<>(doacao, HttpStatus.OK);
     }
+
+    @GetMapping("/historicoSolicitacao")
+    public ResponseEntity<Object> listaDoacoesPorSolicitante(@RequestParam(name = "idSolicitante", required = true) String id,
+                                                             @RequestParam(name = "page", defaultValue = "1") String page,
+                                                             @RequestParam(name = "size", defaultValue = "1") String size) {
+        Page<Doacao> doacaos = doacaoService.listaSolicitacoesPorNomePessoa(id, Integer.valueOf(page), Integer.valueOf(size));
+        if(doacaos.isEmpty()) {
+            return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(doacaos, HttpStatus.OK);
+    }
+
+    @GetMapping("/historicoDoador")
+    public ResponseEntity<Object> listaDoacoesPorDoador(@RequestParam(name = "idDoador", required = true) String id,
+                                                        @RequestParam(name = "page", defaultValue = "1") String page,
+                                                        @RequestParam(name = "size", defaultValue = "1") String size) {
+        Page<Doacao> doacaos = doacaoService.listaDoadoresPorNomeDoador(id, Integer.valueOf(page), Integer.valueOf(size));
+        if(doacaos.isEmpty()) {
+            return new ResponseEntity<>(new AvisosDto("Nenhuma doacao encontrada"), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(doacaos, HttpStatus.OK);
+    }
+
 }
 
 

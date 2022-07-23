@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -28,7 +29,6 @@ public class Doacao {
     @NotBlank(message = "Campo obrigatorio")
     private String tipoSangue;
 
-    @NotBlank(message = "Campo obrigatorio")
     private String descricao;
 
     private String status;
@@ -38,6 +38,9 @@ public class Doacao {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String nomeDoador;
+
+    private LocalDateTime timestamp;
+
 
     public Doacao() {}
 
